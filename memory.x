@@ -1,0 +1,17 @@
+MEMORY {
+    BOOT2(rx) : ORIGIN = 0x10000000, LENGTH = 256
+    FLASH(rx) : ORIGIN = ORIGIN(BOOT2) + LENGTH(BOOT2), LENGTH = 2048k - LENGTH(BOOT2)
+    RAM(rwx) : ORIGIN =  0x20000000, LENGTH = 256k
+    SCRATCH_X(rwx) : ORIGIN = ORIGIN(RAM) + LENGTH(RAM), LENGTH = 4k
+    SCRATCH_Y(rwx) : ORIGIN = ORIGIN(SCRATCH_X) + LENGTH(SCRATCH_X), LENGTH = 4k
+}
+
+_stack_start = ORIGIN(SCRATCH_Y) + LENGTH(SCRATCH_Y);
+
+SECTIONS {
+    /* ### Boot loader */
+    .boot2 ORIGIN(BOOT2) :
+    {
+        KEEP(*(.boot2));
+    } > BOOT2
+} INSERT BEFORE .text;
