@@ -1,0 +1,15 @@
+pico sdk init flow:
+
+- reset all peripherals but QSPI pads and IO bank, PLLs
+- pull peripherals clocked by clk_ref and clk_sys out of reset
+- call early init routines
+- initialize the entire clock tree
+- pull everything else out of reset
+- disable inputs on pads that are not broken out
+- initialize mutexes (????)
+- copy vector table to RAM
+- configure the MPU for stack overflow protection
+- reset spinlocks
+- set up IRQ priorities
+- initialize alarm pool (?)
+- run constructors (C++?)
