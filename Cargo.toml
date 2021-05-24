@@ -14,3 +14,8 @@ cortex-m-rt = "0.6.13"
 cortex-m-semihosting = "0.3.7"
 rp2040-boot2 = "0.1.2"
 panic-semihosting = "0.5.6"
+
+[profile.release]
+debug = true
+lto = true
+opt-level = "s"
