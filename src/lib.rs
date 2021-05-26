@@ -9,6 +9,8 @@ pub use rp2040_pac as pac;
 #[cfg(feature = "rt")]
 pub use pac::interrupt;
 
+pub mod system;
+
 pub mod clocks;
 pub mod pll;
 pub mod xosc;
