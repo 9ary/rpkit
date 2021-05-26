@@ -28,7 +28,9 @@ unsafe fn main() -> ! {
     unsafe { rpkit::xosc::init(pac.XOSC); }
     hprintln!("XOSC initialized successfully!").unwrap();
 
-    pac.RESETS.reset.modify(|_, w| w.pll_sys().clear_bit());
+    unsafe {
+        pac.RESETS.reset.clear_bits(|w| w.pll_sys().clear_bit());
+    }
     while pac.RESETS.reset_done.read().pll_sys().bit_is_clear() {}
     unsafe { rpkit::pll::init(pac.PLL_SYS, 1, 125, 6, 2); }
     hprintln!("PLL initialized successfully!").unwrap();
